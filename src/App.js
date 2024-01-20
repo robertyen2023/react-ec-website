@@ -2,25 +2,25 @@ const App = () => {
   const categoriesData = [
     {
       id: 1,
-      h2Title: 'Mens'
+      title: 'Mens'
     },
     {
       id: 2,
-      h2Title: 'Womens'
+      title: 'Womens'
     },
     {
       id: 3,
-      h2Title: 'Shoes'
+      title: 'Shoes'
     }
   ];
-  const categories = categoriesData.map(({ id = 0, h2Title = '' } = {} ) => (
+  const categories = categoriesData.map(({ id = 0, title = '' } = {} ) => (
     <div 
       className="category-container"
       key={id}
     >
       {/* <img/> */}
       <div className="category-body-container">
-        <h2>{h2Title}</h2>
+        <h2>{title}</h2>
         <p>Shop Now</p>
       </div>
     </div>
