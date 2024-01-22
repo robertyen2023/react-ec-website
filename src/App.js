@@ -1,3 +1,5 @@
+import './App.scss';
+
 const App = () => {
   const categoriesData = [
     {
