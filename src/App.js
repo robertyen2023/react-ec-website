@@ -13,6 +13,14 @@ const App = () => {
     {
       id: 3,
       title: 'Shoes'
+    },
+    {
+      id: 4,
+      title: 'Hats'
+    },
+    {
+      id: 5,
+      title: 'Jackets'
     }
   ];
   const categories = categoriesData.map(({ id = 0, title = '' } = {} ) => (
