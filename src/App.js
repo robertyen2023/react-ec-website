@@ -1,5 +1,7 @@
 import './App.scss';
 
+import CategoryItem from './components/CategoryItem/CategoryItem';
+
 const App = () => {
   const categoriesData = [
     {
@@ -28,23 +30,17 @@ const App = () => {
       "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
     }  
   ];
-  const categories = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {} ) => (
-    <div 
-      className="category-container"
-      key={id}
-      style={{ backgroundImage: `url(${imageUrl})` }}
-    >
-      {/* <img/> */}
-      <div className="category-body-container">
-        <h2>{title}</h2>
-        <p>Shop Now</p>
-      </div>
-    </div>
+  const categoryItems = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {}) => (
+    <CategoryItem 
+      id={id}
+      title={title}
+      imageUrl={imageUrl}
+    />
   ));
 
   return (
     <div className="categories-container">
-      {categories}
+      {categoryItems}
     </div>
   );
 };
