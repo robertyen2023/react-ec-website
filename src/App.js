@@ -1,6 +1,6 @@
 import './App.scss';
 
-import CategoryItem from './components/CategoryItem/CategoryItem';
+import CategoryList from './components/CategoryList/CategoryList';
 
 const App = () => {
   const categoriesData = [
@@ -30,17 +30,11 @@ const App = () => {
       "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
     }  
   ];
-  const categoryItems = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {}) => (
-    <CategoryItem 
-      id={id}
-      title={title}
-      imageUrl={imageUrl}
-    />
-  ));
+  
 
   return (
-    <div className="categories-container">
-      {categoryItems}
+    <div className="app-container">
+      <CategoryList categoriesData={categoriesData} />
     </div>
   );
 };
