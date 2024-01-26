@@ -3,30 +3,36 @@ import './App.scss';
 const App = () => {
   const categoriesData = [
     {
-      id: 1,
-      title: 'Mens'
+      "id": 1,
+      "title": "hats",
+      "imageUrl": "https://i.ibb.co/cvpntL1/hats.png"
     },
     {
-      id: 2,
-      title: 'Womens'
+      "id": 2,
+      "title": "jackets",
+      "imageUrl": "https://i.ibb.co/px2tCc3/jackets.png"
     },
     {
-      id: 3,
-      title: 'Shoes'
+      "id": 3,
+      "title": "sneakers",
+      "imageUrl": "https://i.ibb.co/0jqHpnp/sneakers.png"
     },
     {
-      id: 4,
-      title: 'Hats'
+      "id": 4,
+      "title": "womens",
+      "imageUrl": "https://i.ibb.co/GCCdy8t/womens.png"
     },
     {
-      id: 5,
-      title: 'Jackets'
-    }
+      "id": 5,
+      "title": "mens",
+      "imageUrl": "https://i.ibb.co/R70vBrQ/men.png"
+    }  
   ];
-  const categories = categoriesData.map(({ id = 0, title = '' } = {} ) => (
+  const categories = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {} ) => (
     <div 
       className="category-container"
       key={id}
+      style={{ backgroundImage: `url(${imageUrl})` }}
     >
       {/* <img/> */}
       <div className="category-body-container">
