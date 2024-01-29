@@ -1,8 +1,8 @@
-import './CategoryList.scss';
+import './Directory.scss';
 
 import CategoryItem from '../CategoryItem/CategoryItem';
 
-const CategoryList = ({ categoriesData }) => {
+const Directory = ({ categoriesData }) => {
     if (!categoriesData || !categoriesData.length) return null;
 
     const categoryItems = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {}) => (
@@ -21,4 +21,4 @@ const CategoryList = ({ categoriesData }) => {
 
 };
 
-export default CategoryList;
+export default Directory;

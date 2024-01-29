@@ -1,6 +1,6 @@
 import './App.scss';
 
-import CategoryList from './components/CategoryList/CategoryList';
+import Directory from './components/Directory/Directory';
 
 const App = () => {
   const categoriesData = [
@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <CategoryList categoriesData={categoriesData} />
+      <Directory categoriesData={categoriesData} />
     </div>
   );
 };
