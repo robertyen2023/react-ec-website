@@ -14,7 +14,7 @@ const Directory = ({ categoriesData }) => {
     ));
 
     return (
-        <div className="category-list-container">
+        <div className="directory-container">
             {categoryItems}
         </div>
     );
