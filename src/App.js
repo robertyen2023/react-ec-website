@@ -1,5 +1,6 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
+import Navagation from './routes/Navigation/Navigation';
 import Home from './routes/Home/Home';
 
 // for test only
@@ -12,7 +13,8 @@ const Shop = () => (<div>Shop Component</div>);
 const App = () => {
   return (
     <Routes>
-      <Route path="/home" element={<Home />} >
+      <Route path="/" element={<Navagation />}>
+        <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
       </Route>
     </Routes>
