@@ -25,11 +25,16 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-const googleProvider = new GoogleAuthProvider();
+// [class instance] compare with [auth singleton]
+// which means we might have many providers
+const googleProvider = new GoogleAuthProvider(); 
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-export const auth = getAuth();
+//  [auth singleton] compare with [class instance]
+// which means we can only have 1 auth singleton
+export const auth = getAuth(); 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
+export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
 
