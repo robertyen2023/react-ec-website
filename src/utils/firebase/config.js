@@ -4,6 +4,11 @@ import {
     getAuth,
     signInWithRedirect,
     signInWithPopup,
+    
+    // Native Provider v.s. Additional Provider
+    // - Native Provider: function only
+    // - Additional Provider: class, cuz 3rd party
+    createUserWithEmailAndPassword,
     GoogleAuthProvider
 } from 'firebase/auth';
 
@@ -30,13 +35,27 @@ const firebaseApp = initializeApp(firebaseConfig);
 const googleProvider = new GoogleAuthProvider(); 
 googleProvider.setCustomParameters({ prompt: 'select_account' });
 
-//  [auth singleton] compare with [class instance]
+// [auth singleton] compare with [class instance]
 // which means we can only have 1 auth singleton
 export const auth = getAuth(); 
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 
 export const db = getFirestore();
+
+// [Interface Layer] for 3rd party utilities
+// - allows us to have [a separation layer]
+// - between [the front end] and [the services it relies on]
+// - .
+// - pros 1. easy for managing the code of a 3rd party utility
+// - pros 2. * only need to update [this interface layer]
+// - if there's any change of the 3rd party utility 
+export const createAuthUserWithEmailAndPassword = async (email, passwrod) => {
+  if (!email || !passwrod) return;
+                                            // the auth here means [the auth singleton] above
+                                            // NOT the userAuth
+  return await createUserWithEmailAndPassword(auth, email, passwrod);
+};
 
 export const createUserDocumentFromAuth = async (userAuth) => {
                   // doc($db, $collectionS, $uniqueId/$identifier);
