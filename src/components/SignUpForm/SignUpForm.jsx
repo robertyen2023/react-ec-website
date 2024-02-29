@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
 import './SignUpForm.scss';
+import { 
+    createAuthUserWithEmailAndPassword,
+    createUserDocumentFromAuth,
+} from '../../utils/firebase/config';
 
 const defaultFormFields = {
     displayName: '',
@@ -40,10 +44,57 @@ const SignUpForm = () => {
         });
     };
 
+    const resetFormFields = () => {
+        setFormFields(defaultFormFields);
+    };
+    const handleSignUpFormSubmit = async (event) => {
+        event.preventDefault();
+        
+        if (password !== confirmPassword) {
+            alert('The passwords you typed are inconsistent');
+            return;
+        }
+
+        try {
+            // * Step 1.
+            // .
+            // * The auth object we'll get
+            // - the auth object we'll get 
+            // - would be in the same shape
+            // - even though when we use diff. auth methods
+            // - i.e. 1. auth with email and password
+            // - i.e. 2. auth with fb auth.
+            // - just the value might be different
+            // - i.e. displayName: null when we use [i.e. 1.]
+            // - cuz we won't pass a display name to the auth. method (i.e. 1.)
+            // - when we use it
+            const { user: userAuth } = await createAuthUserWithEmailAndPassword(email, password);
+
+            // Step 2.
+            const userDocRef = await createUserDocumentFromAuth(userAuth, { displayName });
+            console.log(userDocRef);
+
+            // Step 3.
+            resetFormFields();
+
+            alert("You've signed up successfully !!");
+        } catch (error) {
+            // leverage the firebase error code here
+            // for handling firebase auth. requesting errors
+            if (error.code === 'auth/weak-password') {
+                alert('Cannot create user, the password is too weak.');
+            } else if (error.code === 'auth/email-already-in-use') {
+                alert('Cannot create user, the email is already in use.');
+            } else {
+                console.log('An error occurred while createAuthUserWithEmailAndPassword', error);
+            }
+        }
+    };
+
     return (
         <div className='sign-up-form-container'>
             <h1>Sign up with your email and password</h1>
-            <form>
+            <form onSubmit={handleSignUpFormSubmit}>
                 <label>Display Name</label>
                 <input
                     name="displayName"
@@ -58,7 +109,7 @@ const SignUpForm = () => {
                     name="email"
                     onChange={handleChange}
                     required 
-                    type="text"
+                    type="email"
                     value={email}
                 />
 
@@ -67,7 +118,7 @@ const SignUpForm = () => {
                     name="password"
                     onChange={handleChange}
                     required 
-                    type="text"
+                    type="password"
                     value={password}
                 />
 
@@ -76,7 +127,7 @@ const SignUpForm = () => {
                     name="confirmPassword"
                     onChange={handleChange}
                     required 
-                    type="text"
+                    type="password"
                     value={confirmPassword}
                 />
 

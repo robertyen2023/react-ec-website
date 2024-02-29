@@ -52,12 +52,23 @@ export const db = getFirestore();
 // - if there's any change of the 3rd party utility 
 export const createAuthUserWithEmailAndPassword = async (email, passwrod) => {
   if (!email || !passwrod) return;
-                                            // the auth here means [the auth singleton] above
-                                            // NOT the userAuth
+                                            // * the auth here means [the auth singleton] above
+                                            // - NOT the userAuth
+                                            // .
+                                            // * we DON'T really store password
+                                            // - into the firestore
+                                            // - firebase auth. has a systen for authenticating users
+                                            // - with password but without storing [the plain code 明碼 / 明文]
+                                            // - into the database
   return await createUserWithEmailAndPassword(auth, email, passwrod);
 };
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+
+  // i.e. additionalInformation { displayName: 'Alvin' }
+  additionalInformation
+) => {
                   // doc($db, $collectionS, $uniqueId/$identifier);
   const userDocRef = doc(db, 'users', userAuth.uid);
 
@@ -74,7 +85,10 @@ export const createUserDocumentFromAuth = async (userAuth) => {
       await setDoc(userDocRef, {
         displayName,
         email,
-        createdAt
+        createdAt,
+        ...additionalInformation
+        // i.e. replace { displayName: null }
+        // - with additionalInformation { displayName: 'Alvin' }
       });
     } catch (error) {
       console.log('error creating the user', error.message);
