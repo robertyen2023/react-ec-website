@@ -20,7 +20,14 @@ const SignUpForm = () => {
         confirmPassword = ''
     } = formFields;
 
-    // generalize handling form fields
+    // * Controlled v.s. Uncontrolled
+    // - Controlled: single source of truth、more flexible
+    // - Controlled cont.: state, value, "data handler"
+    // - Uncontrolled: easy、less settings
+    // - Uncontrolled: NOT able to influence the data / value
+    // - Uncontrolled cont.: local state, default value, [ref, $ref.current.value]
+    // .
+    // * generalize handling form fields
     const handleChange = (event) => {
         const {
             name = '',
