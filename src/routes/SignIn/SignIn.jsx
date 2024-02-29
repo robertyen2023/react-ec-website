@@ -8,6 +8,8 @@ import {
     createUserDocumentFromAuth 
 } from '../../utils/firebase/config';
 
+import SignUpForm from '../../components/SignUpForm/SignUpForm';
+
 const SignIn = () => {
     useEffect(() => {
         // useEffect must NOT return anything besides a function
@@ -53,9 +55,13 @@ const SignIn = () => {
 
     return (
         <div>
-            <h1>SIgn In Page</h1>
-            <button onClick={logGoogleRedirectUser}>Sign In with Google Redirect</button>
-            <button onClick={logGoogleUser}>Sign In with Google Popup</button>
+            <div>
+                <button onClick={logGoogleRedirectUser}>Sign In with Google Redirect</button>
+                <button onClick={logGoogleUser}>Sign In with Google Popup</button>
+            </div>
+            <div>
+                <SignUpForm />
+            </div>
         </div>
     );
 };
