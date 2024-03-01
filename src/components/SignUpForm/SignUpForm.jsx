@@ -6,6 +6,7 @@ import {
     createUserDocumentFromAuth,
 } from '../../utils/firebase/config';
 import FormInput from '../../components/FormInput/FormInput';
+import Button, { BUTTON_TYPE_CLASSES } from '../../components/Button/Button';
 
 const defaultFormFields = {
     displayName: '',
@@ -136,7 +137,12 @@ const SignUpForm = () => {
                     value={confirmPassword}
                 />
 
-                <button type="submit">Sign Up</button>
+                <Button 
+                    type="submit"
+                    buttonType={BUTTON_TYPE_CLASSES.INVERTED}
+                >
+                    Sign Up
+                </Button>
             </form>
         </div>
     );

@@ -9,6 +9,7 @@ import {
 } from '../../utils/firebase/config';
 
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
+import Button, { BUTTON_TYPE_CLASSES } from '../../components/Button/Button';
 
 const SignIn = () => {
     useEffect(() => {
@@ -56,8 +57,14 @@ const SignIn = () => {
     return (
         <div>
             <div>
-                <button onClick={logGoogleRedirectUser}>Sign In with Google Redirect</button>
-                <button onClick={logGoogleUser}>Sign In with Google Popup</button>
+                <Button
+                    buttonType={BUTTON_TYPE_CLASSES['GOOGLE-SIGN-IN']}
+                    type="submit"
+                    onClick={logGoogleUser}
+                >
+                    Sign In with Google Popup
+                </Button>
+                {/* <button onClick={logGoogleRedirectUser}>Sign In with Google Redirect</button> */}
             </div>
             <div>
                 <SignUpForm />
