@@ -11,7 +11,7 @@ import {
 import SignUpForm from '../../components/SignUpForm/SignUpForm';
 import Button, { BUTTON_TYPE_CLASSES } from '../../components/Button/Button';
 
-const SignIn = () => {
+const Authentication = () => {
     useEffect(() => {
         // useEffect must NOT return anything besides a function
         // for example, an async function is not valid
@@ -73,4 +73,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default Authentication;
