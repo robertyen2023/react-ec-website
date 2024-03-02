@@ -9,6 +9,7 @@ import {
     // - Native Provider: function only
     // - Additional Provider: class, cuz 3rd party
     createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
     GoogleAuthProvider
 } from 'firebase/auth';
 
@@ -61,6 +62,19 @@ export const createAuthUserWithEmailAndPassword = async (email, passwrod) => {
                                             // - with password but without storing [the plain code 明碼 / 明文]
                                             // - into the database
   return await createUserWithEmailAndPassword(auth, email, passwrod);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, passwrod) => {
+  if (!email || !passwrod) return;
+                                            // * the auth here means [the auth singleton] above
+                                            // - NOT the userAuth
+                                            // .
+                                            // * we DON'T really store password
+                                            // - into the firestore
+                                            // - firebase auth. has a systen for authenticating users
+                                            // - with password but without storing [the plain code 明碼 / 明文]
+                                            // - into the database
+  return await signInWithEmailAndPassword(auth, email, passwrod);
 };
 
 export const createUserDocumentFromAuth = async (

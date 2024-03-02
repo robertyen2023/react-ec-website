@@ -4,6 +4,7 @@ import './SignInForm.scss';
 import {
     createUserDocumentFromAuth,
     signInWithGooglePopup,
+    signInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/config';
 import FormInput from '../FormInput/FormInput';
 import Button, { BUTTON_TYPE_CLASSES } from '../Button/Button';
@@ -37,6 +38,22 @@ const SignInForm = () => {
     };
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        try {
+            const response = await signInAuthUserWithEmailAndPassword(email, password);
+            resetFormFields();
+        } catch (error) {
+            switch(error.code) {
+                case 'auth/wrong-password':
+                    alert('incorrect password for the email');
+                    break
+                case 'auth/user-not-found':
+                    alert('no user is associated with this email');
+                    break
+                default:
+                    console.log('An error occurred while handleSubmit', error);       
+            }
+        }
     };
 
     const signInWithGoogle = async () => {
