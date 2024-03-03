@@ -95,7 +95,8 @@ const SignUpForm = () => {
 
     return (
         <div className='sign-up-form-container'>
-            <h1>Sign up with your email and password</h1>
+            <h2>Don't have an account?</h2>
+            <span>Sign up with your email  and password</span>
             <form onSubmit={handleSignUpFormSubmit}>
                 <FormInput
                     labelText="Display Name"
@@ -139,7 +140,7 @@ const SignUpForm = () => {
 
                 <Button 
                     type="submit"
-                    buttonType={BUTTON_TYPE_CLASSES.INVERTED}
+                    // buttonType={BUTTON_TYPE_CLASSES.INVERTED}
                 >
                     Sign Up
                 </Button>
