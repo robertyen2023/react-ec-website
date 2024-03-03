@@ -90,27 +90,28 @@ const SignInForm = () => {
                     type="password"
                     value={password}
                 />
+                <div className='buttons-container'>
+                    <Button 
+                        type="submit"
+                        // buttonType={BUTTON_TYPE_CLASSES.INVERTED}
+                    >
+                        Sign In
+                    </Button>
 
-                <Button 
-                    type="submit"
-                    buttonType={BUTTON_TYPE_CLASSES.INVERTED}
-                >
-                    Sign In
-                </Button>
-
-                {/*
-                    In a form, 
-                    the defalut value of all the buttons would be type='submit',
-                    ==so it's important to specify type='button' on the second and the following buttons==
-                    if you don't want the buttons act like a form submit button.
-                 */}
-                <Button 
-                    type="button"
-                    buttonType={BUTTON_TYPE_CLASSES['GOOGLE-SIGN-IN']}
-                    onClick={signInWithGoogle}
-                >
-                    Google Sign In
-                </Button>
+                    {/*
+                        In a form, 
+                        the defalut value of all the buttons would be type='submit',
+                        ==so it's important to specify type='button' on the second and the following buttons==
+                        if you don't want the buttons act like a form submit button.
+                    */}
+                    <Button 
+                        type="button"
+                        buttonType={BUTTON_TYPE_CLASSES['GOOGLE-SIGN-IN']}
+                        onClick={signInWithGoogle}
+                    >
+                        Google Sign In
+                    </Button>
+                </div>
             </form>
         </div>
     );
