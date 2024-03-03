@@ -7,10 +7,10 @@ export const BUTTON_TYPE_CLASSES = {
 
 const Button = ({ 
     children, 
-    buttonType = BUTTON_TYPE_CLASSES.INVERTED, 
+    buttonType = '', 
     ...otherProps 
 }) => {
-    const buttonTypeClass = BUTTON_TYPE_CLASSES[buttonType].toLowerCase();
+    const buttonTypeClass = buttonType && BUTTON_TYPE_CLASSES[buttonType].toLowerCase();
     const buttonClassName = `button-container ${buttonTypeClass}`;
 
     return (
