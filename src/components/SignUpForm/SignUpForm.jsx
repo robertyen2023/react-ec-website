@@ -83,12 +83,22 @@ const SignUpForm = () => {
         } catch (error) {
             // leverage the firebase error code here
             // for handling firebase auth. requesting errors
-            if (error.code === 'auth/weak-password') {
-                alert('Cannot create user, the password is too weak.');
-            } else if (error.code === 'auth/email-already-in-use') {
-                alert('Cannot create user, the email is already in use.');
-            } else {
-                console.log('An error occurred while createAuthUserWithEmailAndPassword', error);
+            // if (error.code === 'auth/weak-password') {
+            //     alert('Cannot create user, the password is too weak.');
+            // } else if (error.code === 'auth/email-already-in-use') {
+            //     alert('Cannot create user, the email is already in use.');
+            // } else {
+            //     console.log('An error occurred while createAuthUserWithEmailAndPassword', error);
+            // }
+            switch(error.code) {
+                case 'auth/weak-password':
+                    alert('Cannot create user, the password is too weak.');
+                    break
+                case 'auth/email-already-in-use':
+                    alert('Cannot create user, the email is already in use.');
+                    break
+                default:
+                    console.log('An error occurred while createAuthUserWithEmailAndPassword', error);
             }
         }
     };
