@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import './SignInForm.scss';
 import {
@@ -8,6 +8,7 @@ import {
 } from '../../utils/firebase/config';
 import FormInput from '../FormInput/FormInput';
 import Button, { BUTTON_TYPE_CLASSES } from '../Button/Button';
+import { UserContext } from '../../contexts/user-context';
 
 const defaultFormFields = {
     email: '',
@@ -16,6 +17,16 @@ const defaultFormFields = {
 
 const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields);
+
+    // 只要hook [a context] into any component like below (using useContext in a component)
+    // 則 [該context] 中的資料改變，所有hooked components 的 [component function code] 都會 [re-run]
+    // 即使沒有在jsx中使用 the context values，只要該component有被掛到該context，也會 [re-run]
+    // .
+    // 2. use a context
+    const { currentUser, setCurrentUser } = useContext(UserContext);
+    // const userContextValue = useContext(UserContext);
+    // console.log(userContextValue);
+
     const {
         email = '',
         password = '',
