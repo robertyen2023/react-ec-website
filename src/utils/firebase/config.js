@@ -10,6 +10,7 @@ import {
     // - Additional Provider: class, cuz 3rd party
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
+    signOut,
     GoogleAuthProvider
 } from 'firebase/auth';
 
@@ -38,7 +39,13 @@ googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // [auth singleton] compare with [class instance]
 // which means we can only have 1 auth singleton
-export const auth = getAuth(); 
+export const auth = getAuth();
+
+// LOGOUT: 3.1. 
+//                                                   [auth] 
+//                                                   是一直以來用來追蹤auth狀態的singleton
+// 因為在用到signOutUser的地方要拿值，所以改為async
+export const signOutUser = async () => await signOut(auth);
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider);
 export const signInWithGoogleRedirect = () => signInWithRedirect(auth, googleProvider);
 

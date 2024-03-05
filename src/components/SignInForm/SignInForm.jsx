@@ -23,7 +23,7 @@ const SignInForm = () => {
     // 即使沒有在jsx中使用 the context values，只要該component有被掛到該context，也會 [re-run]
     // .
     // 2. use a context
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+    const { setCurrentUser } = useContext(UserContext);
     // const userContextValue = useContext(UserContext);
     // console.log(userContextValue);
 
@@ -51,7 +51,10 @@ const SignInForm = () => {
         event.preventDefault();
 
         try {
-            const response = await signInAuthUserWithEmailAndPassword(email, password);
+            const { user: userAuth } = await signInAuthUserWithEmailAndPassword(email, password);
+            // LOGOUT: 2.1.
+            setCurrentUser(userAuth);
+
             resetFormFields();
         } catch (error) {
             switch(error.code) {
@@ -70,6 +73,8 @@ const SignInForm = () => {
     const signInWithGoogle = async () => {
         const { user: userAuth } = await signInWithGooglePopup();
         // console.log(userAuth);
+        // LOGOUT: 2.2.
+        setCurrentUser(userAuth);
 
         // ==<font color=green>登入時，</font>==
         // ==<font color=green>只有 signInWithGoogle 需要 createUserDocumentFromAuth ???</font>==

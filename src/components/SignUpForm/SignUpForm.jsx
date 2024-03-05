@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 
 import './SignUpForm.scss';
 import { 
@@ -7,6 +7,7 @@ import {
 } from '../../utils/firebase/config';
 import FormInput from '../../components/FormInput/FormInput';
 import Button, { BUTTON_TYPE_CLASSES } from '../../components/Button/Button';
+import { UserContext } from '../../contexts/user-context';
 
 const defaultFormFields = {
     displayName: '',
@@ -19,6 +20,9 @@ const SignUpForm = () => {
     // instead of handling 4 separate form field states,
     // wrap all the fields as a formFields object
     const [formFields, setFormFields] = useState(defaultFormFields);
+    // LOGOUT: 2.3.
+    const { setCurrentUser } = useContext(UserContext);
+
     const {
         displayName = '',
         email = '',
@@ -71,6 +75,8 @@ const SignUpForm = () => {
             // - cuz we won't pass a display name to the auth. method (i.e. 1.)
             // - when we use it
             const { user: userAuth } = await createAuthUserWithEmailAndPassword(email, password);
+            // LOGOUT: 2.4.
+            setCurrentUser(userAuth);
 
             // Step 2.
             const userDocRef = await createUserDocumentFromAuth(userAuth, { displayName });
