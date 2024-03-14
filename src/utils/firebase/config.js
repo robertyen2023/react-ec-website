@@ -11,7 +11,10 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+
+    // Check the explanation below.
+    onAuthStateChanged
 } from 'firebase/auth';
 
 import {
@@ -83,6 +86,32 @@ export const signInAuthUserWithEmailAndPassword = async (email, passwrod) => {
                                             // - into the database
   return await signInWithEmailAndPassword(auth, email, passwrod);
 };
+
+// [onAuthStateChanged Step 1.]
+// onAuthStateChanged is an observable listener
+// - that takes the auth singleton and callback
+// - in order to help you
+// - 1. track auth state changes and
+// - 2. centralize the auth related logic
+// - (actual logic placement)
+// .
+// Also,
+// - the auth singleton
+// - would track the auth state
+// - even though the user refreshes pages
+// .
+// Furthermore,
+// - it will return [an unsubscriber]
+// - in order for us 
+// - to prevent [the open listener] from [memory leak].
+// - i.e. Stop the listener when a context provider component unmount
+// .
+// the signature of the callback
+// callback = (userAuth) => { .... }
+// See available properties and methods [of] userAcc
+// on the doc.
+// https://firebase.google.com/docs/reference/js/auth.user
+export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
 export const createUserDocumentFromAuth = async (
   userAuth,
