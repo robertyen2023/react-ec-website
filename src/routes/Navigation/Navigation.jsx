@@ -7,7 +7,10 @@ import { signOutUser } from '../../utils/firebase/config';
 import './Navigation.scss';
 
 const Navigation = () => {
-    const { currentUser, setCurrentUser } = useContext(UserContext);
+    const { 
+        currentUser, 
+        // setCurrentUser 
+    } = useContext(UserContext);
 
     // LOGOUT: 4.
     const signOutHandler = async () => {
@@ -20,7 +23,7 @@ const Navigation = () => {
 
         // LOGOUT: 4.2. 不能只通知firebase，
         // UserContext中的使用者也要清掉
-        setCurrentUser(null);
+        // setCurrentUser(null);
         alert("You've logged out successfully!");
     };
     

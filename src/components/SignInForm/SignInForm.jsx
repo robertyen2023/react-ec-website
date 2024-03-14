@@ -2,13 +2,13 @@ import { useState, useContext } from 'react';
 
 import './SignInForm.scss';
 import {
-    createUserDocumentFromAuth,
+    // createUserDocumentFromAuth,
     signInWithGooglePopup,
     signInAuthUserWithEmailAndPassword
 } from '../../utils/firebase/config';
 import FormInput from '../FormInput/FormInput';
 import Button, { BUTTON_TYPE_CLASSES } from '../Button/Button';
-import { UserContext } from '../../contexts/user-context';
+// import { UserContext } from '../../contexts/user-context';
 
 const defaultFormFields = {
     email: '',
@@ -23,7 +23,7 @@ const SignInForm = () => {
     // 即使沒有在jsx中使用 the context values，只要該component有被掛到該context，也會 [re-run]
     // .
     // 2. use a context
-    const { setCurrentUser } = useContext(UserContext);
+    // const { setCurrentUser } = useContext(UserContext);
     // const userContextValue = useContext(UserContext);
     // console.log(userContextValue);
 
@@ -53,7 +53,7 @@ const SignInForm = () => {
         try {
             const { user: userAuth } = await signInAuthUserWithEmailAndPassword(email, password);
             // LOGOUT: 2.1.
-            setCurrentUser(userAuth);
+            // setCurrentUser(userAuth);
 
             resetFormFields();
         } catch (error) {
@@ -74,12 +74,12 @@ const SignInForm = () => {
         const { user: userAuth } = await signInWithGooglePopup();
         // console.log(userAuth);
         // LOGOUT: 2.2.
-        setCurrentUser(userAuth);
+        // setCurrentUser(userAuth);
 
         // ==<font color=green>登入時，</font>==
         // ==<font color=green>只有 signInWithGoogle 需要 createUserDocumentFromAuth ???</font>==
-        const userDocRef= await createUserDocumentFromAuth(userAuth);
-        console.log(userDocRef);
+        // const userDocRef= await createUserDocumentFromAuth(userAuth);
+        // console.log(userDocRef);
     };
 
     return (

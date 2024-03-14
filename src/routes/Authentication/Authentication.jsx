@@ -40,8 +40,8 @@ const Authentication = () => {
     //         // i.e. before applying [the Google Redirect User Flow]
     //         if (response) {
     //             const { user: userAuth } = response;
-    //             const userDocRef = await createUserDocumentFromAuth(userAuth);
-    //             console.log(userDocRef);
+    //             // const userDocRef = await createUserDocumentFromAuth(userAuth);
+    //             // console.log(userDocRef);
     //         }
     //     };
     //     fetchRedirectResult();
