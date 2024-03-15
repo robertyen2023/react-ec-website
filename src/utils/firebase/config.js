@@ -111,6 +111,13 @@ export const signInAuthUserWithEmailAndPassword = async (email, passwrod) => {
 // See available properties and methods [of] userAcc
 // on the doc.
 // https://firebase.google.com/docs/reference/js/auth.user
+// .
+// ==The moment we create the listener==
+// - is just telling the firebase/auth;
+// - hey, create [the listener] for me [using the callback].
+// .
+// The onAuthStateChanged is just building
+// - [the listener model] for us.
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback);
 
 export const createUserDocumentFromAuth = async (
