@@ -7,12 +7,14 @@ import { signOutUser } from '../../utils/firebase/config';
 import './Navigation.scss';
 import CartIcon from '../../components/CartIcon/CartIcon';
 import CartDropdown from '../../components/CartDropdown/CartDropdown';
+import { CartContext } from '../../contexts/cart-context';
 
 const Navigation = () => {
     const { 
         currentUser, 
         // setCurrentUser 
     } = useContext(UserContext);
+    const { isCartOpen } = useContext(CartContext);
 
     // LOGOUT: 4.
     const signOutHandler = async () => {
@@ -38,6 +40,8 @@ const Navigation = () => {
             </Link>
         );
 
+    const cartDropDown = isCartOpen && <CartDropdown />;
+
     return (
         <>
             <div className="navigation">
@@ -51,7 +55,7 @@ const Navigation = () => {
                     { authOrSignOut }
                     <CartIcon />
                 </div>
-                <CartDropdown />
+                { cartDropDown }
             </div>
             <Outlet />
         </>    
