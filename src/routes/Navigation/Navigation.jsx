@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/user-context';
 import { signOutUser } from '../../utils/firebase/config';
 import './Navigation.scss';
 import CartIcon from '../../components/CartIcon/CartIcon';
+import CartDropdown from '../../components/CartDropdown/CartDropdown';
 
 const Navigation = () => {
     const { 
@@ -50,6 +51,7 @@ const Navigation = () => {
                     { authOrSignOut }
                     <CartIcon />
                 </div>
+                <CartDropdown />
             </div>
             <Outlet />
         </>    
