@@ -6,6 +6,7 @@ import { CartContext } from '../../contexts/cart-context';
 const Checkout = () => {
     const {
         cartItems,
+        addItemToCart
     } = useContext(CartContext);
 
     const cartItemList = cartItems.map((cartItem) => {
@@ -15,6 +16,10 @@ const Checkout = () => {
             quantity 
         } = cartItem;
 
+        const cartItemIncrementHandler = () => {
+            addItemToCart(cartItem);
+        };
+
         return (
             <div key={id}>
                 <h2>{name}</h2>
@@ -22,7 +27,7 @@ const Checkout = () => {
                 <br />
                 <span>decrement</span>
                 <br />
-                <span>increment</span>
+                <span onClick={cartItemIncrementHandler}>increment</span>
             </div>
         );
     });
