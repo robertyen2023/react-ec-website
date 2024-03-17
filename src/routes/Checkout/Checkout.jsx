@@ -2,6 +2,7 @@ import { useContext } from 'react';
 
 import './Checkout.scss';
 import { CartContext } from '../../contexts/cart-context';
+import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 
 const Checkout = () => {
     const {
@@ -10,37 +11,45 @@ const Checkout = () => {
         removeItemFromCart
     } = useContext(CartContext);
 
-    const cartItemList = cartItems.map((cartItem) => {
-        const { 
-            id, 
-            name, 
-            quantity 
-        } = cartItem;
+    const cartItemIncrementHandler = () => {
+        // addItemToCart(cartItem);
+    };
 
-        const cartItemIncrementHandler = () => {
-            addItemToCart(cartItem);
-        };
+    const cartItemDecrementHandler = () => {
+        // removeItemFromCart(cartItem);
+    };
 
-        const cartItemDecrementHandler = () => {
-            removeItemFromCart(cartItem);
-        };
+    const cartItemList = cartItems.map((cartItem) => (
+        <CheckoutItem
+            key={cartItem.id}
+            cartItem={cartItem}
+        />
+    ));
 
-        return (
-            <div key={id}>
-                <h2>{name}</h2>
-                <span>{quantity}</span>
-                <br />
-                <span onClick={cartItemDecrementHandler}>decrement</span>
-                <br />
-                <span onClick={cartItemIncrementHandler}>increment</span>
+    const checkoutHeader = (
+        <div className='checkout-header'>
+            <div className='header-block'>
+                <span>Product</span>
             </div>
-        );
-    });
+            <div className='header-block'>
+                <span>Description</span>
+            </div>
+            <div className='header-block'>
+                <span>Quantity</span>
+            </div>
+            <div className='header-block'>
+                <span>Price</span>
+            </div>
+            <div className='header-block'>
+                <span>Remove</span>
+            </div>
+        </div>
+    );
 
     return (
         <div className='checkout-container'>
-            <h1>I am the checkout page.</h1>
-            <div>{cartItemList}</div>
+            {checkoutHeader}
+            {cartItemList}
         </div>
     );
 };
