@@ -6,6 +6,7 @@ export const CartContext = createContext({
     cartItems: [],
     cartCount: 0,
     removeItemFromCart: () => {},
+    clearItemFromCart: () => {},
 
     // 不直接操作setter !! // ???
     addItemToCart: () => {}
@@ -48,6 +49,10 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
     return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
 };
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+};
+
 export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -71,12 +76,17 @@ export const CartProvider = ({ children }) => {
         setCartItems(removeCartItem(cartItems, cartItemToRemove));
     };
 
+    const clearItemFromCart = (cartItemToClear) => {
+        setCartItems(clearCartItem(cartItems, cartItemToClear));
+    };
+
     const providerValue = {
         isCartOpen,
         setIsCartOpen,
         cartItems,
         cartCount,
         removeItemFromCart,
+        clearItemFromCart,
 
         addItemToCart
     };
