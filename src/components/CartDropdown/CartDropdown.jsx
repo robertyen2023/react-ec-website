@@ -3,12 +3,16 @@ import { useContext } from 'react';
 import './CartDropdown.scss';
 import Button from '../Button/Button';
 import { CartContext } from '../../contexts/cart-context';
+import CartItem from '../CartItem/CartItem';
 
 const CartDropdown = () => {
     const { cartItems } = useContext(CartContext);
 
-    const tempCartItemList = cartItems.map(({ name, id, quantity }) => (
-        <span key={id}>{name} x {quantity}</span>
+    const tempCartItemList = cartItems.map((cartItem) => (
+        <CartItem
+            key={cartItem.id}
+            cartItem={cartItem}
+        />
     ));
 
     return (
