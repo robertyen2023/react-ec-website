@@ -5,6 +5,7 @@ export const CartContext = createContext({
     setIsCartOpen: () => {},
     cartItems: [],
     cartCount: 0,
+    removeItemFromCart: () => {},
 
     // 不直接操作setter !! // ???
     addItemToCart: () => {}
@@ -26,6 +27,27 @@ const addCartItem = (cartItems, productToAdd) => {
     return [...cartItems, { ...productToAdd, quantity: 1 }];
 };
 
+// Why is that we always create the new object at the function returns ?
+// - cuz, if we don't return A NEW OBJECT,
+// - react won't trigger the re-render process,
+// - React would think [the object data state] is still the old one
+// - even though we mutate the properties of [the object data state].
+const removeCartItem = (cartItems, cartItemToRemove) => {
+    const existingCartItem = cartItems.find(
+        (cartItem) => cartItem.id === cartItemToRemove.id
+    );
+
+    if (existingCartItem.quantity !== 1) {
+        return cartItems.map((cartItem) => (
+            cartItem.id === cartItemToRemove.id
+                ? { ...cartItem, quantity: cartItem.quantity - 1 }
+                : cartItem
+        ));
+    }
+
+    return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
+};
+
 export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
@@ -45,11 +67,16 @@ export const CartProvider = ({ children }) => {
         setCartItems(addCartItem(cartItems, productToAdd));
     };
 
+    const removeItemFromCart = (cartItemToRemove) => {
+        setCartItems(removeCartItem(cartItems, cartItemToRemove));
+    };
+
     const providerValue = {
         isCartOpen,
         setIsCartOpen,
         cartItems,
         cartCount,
+        removeItemFromCart,
 
         addItemToCart
     };
