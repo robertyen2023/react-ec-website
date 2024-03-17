@@ -7,17 +7,7 @@ import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 const Checkout = () => {
     const {
         cartItems,
-        addItemToCart,
-        removeItemFromCart
     } = useContext(CartContext);
-
-    const cartItemIncrementHandler = () => {
-        // addItemToCart(cartItem);
-    };
-
-    const cartItemDecrementHandler = () => {
-        // removeItemFromCart(cartItem);
-    };
 
     const cartItemList = cartItems.map((cartItem) => (
         <CheckoutItem
