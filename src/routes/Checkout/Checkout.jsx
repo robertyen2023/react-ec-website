@@ -7,6 +7,7 @@ import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 const Checkout = () => {
     const {
         cartItems,
+        cartTotal
     } = useContext(CartContext);
 
     const cartItemList = cartItems.map((cartItem) => (
@@ -40,6 +41,7 @@ const Checkout = () => {
         <div className='checkout-container'>
             {checkoutHeader}
             {cartItemList}
+            <span className='total'>Total: ${cartTotal}</span>
         </div>
     );
 };

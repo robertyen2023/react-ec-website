@@ -7,6 +7,7 @@ export const CartContext = createContext({
     cartCount: 0,
     removeItemFromCart: () => {},
     clearItemFromCart: () => {},
+    cartTotal: 0,
 
     // 不直接操作setter !! // ???
     addItemToCart: () => {}
@@ -57,13 +58,25 @@ export const CartProvider = ({ children }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState([]);
     const [cartCount, setCartCount] = useState(0);
+    const [cartTotal, setCartTotal] = useState(0);
 
+    // **Why do we separate useEffects even though they depend on the same value (cartItems) ?**
+    // - 1. Each effect should only govern ONE singular responsibility.
+    // --- Like each function should only govern ONE singular responsibility.
+    // - 2. Readability
     useEffect(() => {
         const newCartCount = cartItems.reduce(
             (total, cartItem) => total + cartItem.quantity,
             0
         );
         setCartCount(newCartCount);
+    }, [cartItems]);
+    useEffect(() => {
+        const newCartTotal = cartItems.reduce(
+            (total, { price,  quantity }) => total + (price * quantity),
+            0
+        );
+        setCartTotal(newCartTotal);
     }, [cartItems]);
 
     // 不直接操作setter !! // ???
@@ -87,6 +100,7 @@ export const CartProvider = ({ children }) => {
         cartCount,
         removeItemFromCart,
         clearItemFromCart,
+        cartTotal,
 
         addItemToCart
     };
