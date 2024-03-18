@@ -22,8 +22,8 @@ import {
   doc,
   getDoc,
   setDoc,
-  collection,
-  writeBatch
+  // collection,
+  // writeBatch
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -157,25 +157,25 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 }
 
-export const addCollectionAndDocuments = async (
-  collectionKey,
-  objectsToAdd
-) => {
-  const collectionRef = collection(db, collectionKey);
-  const batch = writeBatch(db);
+// export const addCollectionAndDocuments = async (
+//   collectionKey,
+//   objectsToAdd
+// ) => {
+//   const collectionRef = collection(db, collectionKey);
+//   const batch = writeBatch(db);
 
-  objectsToAdd.forEach((theObjectToAdd) => {
-                  // doc($collectionRef, $documentKey)
-    console.log(theObjectToAdd);
-    const docRef = doc(collectionRef, theObjectToAdd.title.toLowerCase());
-    batch.set(docRef, theObjectToAdd);
-  });
+//   objectsToAdd.forEach((theObjectToAdd) => {
+//                   // doc($collectionRef, $documentKey)
+//     console.log(theObjectToAdd);
+//     const docRef = doc(collectionRef, theObjectToAdd.title.toLowerCase());
+//     batch.set(docRef, theObjectToAdd);
+//   });
 
-  try {
-    await batch.commit();
-  } catch (error) {
-    console.log('addCollectionAndDocuments', error);
-  }
+//   try {
+//     await batch.commit();
+//   } catch (error) {
+//     console.log('addCollectionAndDocuments', error);
+//   }
   
-  console.log('done');
-};
+//   console.log('done');
+// };
