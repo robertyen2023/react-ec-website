@@ -22,8 +22,10 @@ import {
   doc,
   getDoc,
   setDoc,
-  // collection,
-  // writeBatch
+  collection,
+  // writeBatch,
+  query,
+  getDocs
 } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -179,3 +181,34 @@ export const createUserDocumentFromAuth = async (
   
 //   console.log('done');
 // };
+
+// Again, make an interface instead of using the 3rd party library directly
+// so that we don't need to change codes [everywhere] where we use the library.
+// Instead, we only need to edit [1 place], which is this function.
+// => Minimize the impact when the 3rd party library changes.
+// .
+// firebase: backwards compatible, but frequently change
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    console.log(docSnapshot.data());
+
+    // i.e. { title: 'Jackets', items: [...]  }
+    const { title, items } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+
+  // i.e. 
+  // {
+  //   hats: $itemsArr,
+  //   womens: $itemsArr,
+  //   ...
+  // }
+  console.log(categoryMap);
+
+  return categoryMap;
+};
