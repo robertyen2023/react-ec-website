@@ -193,7 +193,7 @@ export const getCategoriesAndDocuments = async () => {
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+  const categoriesMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
     console.log(docSnapshot.data());
 
     // i.e. { title: 'Jackets', items: [...]  }
@@ -208,7 +208,7 @@ export const getCategoriesAndDocuments = async () => {
   //   womens: $itemsArr,
   //   ...
   // }
-  console.log(categoryMap);
+  console.log(categoriesMap);
 
-  return categoryMap;
+  return categoriesMap;
 };

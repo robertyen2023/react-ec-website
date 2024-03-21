@@ -4,13 +4,19 @@ import { createContext, useState, useEffect } from 'react';
 // import { addCollectionAndDocuments } from '../utils/firebase/config.js';
 import { getCategoriesAndDocuments } from '../utils/firebase/config.js';
 
-export const ProductsContext = createContext({
-    products: [],
-    setProducts: () => {}
+export const CategoriesContext = createContext({
+    categoriesMap: {},
+    setCategoriesMap: () => {}
 });
 
-export const ProductsProvider = ({ children }) => {
-    const [products, setProducts] = useState([]);
+export const CategoriesProvider = ({ children }) => {
+    // Why we want to use an empty object as default instead of using null 
+    // - like the normal usage when we might have an object value to a variable
+    // -- => Cause we're really interfacing with the object keyS 
+    // -- in order to get the [responding items] for the category,
+    // -- we'll just get nothing back
+    // -- if we're trying to get [them] and {there are no keyS}.
+    const [categoriesMap, setCategoriesMap] = useState({});
     // useEffect(() => {
     //     addCollectionAndDocuments('categories', SHOP_DATA);
     // }, []);
@@ -27,8 +33,8 @@ export const ProductsProvider = ({ children }) => {
     // i.e. like the code below
     useEffect(() => {
         const getCategoriesMap = async () => {
-            const categoryMap = await getCategoriesAndDocuments();
-            console.log(categoryMap);
+            const categoriesMap = await getCategoriesAndDocuments();
+            console.log(categoriesMap);
         };
 
         getCategoriesMap();
@@ -36,13 +42,13 @@ export const ProductsProvider = ({ children }) => {
 
 
     const providerValue = {
-        products,
-        setProducts
+        categoriesMap,
+        setCategoriesMap
     };
 
     return (
-        <ProductsContext.Provider value={providerValue}>
+        <CategoriesContext.Provider value={providerValue}>
             {children}
-        </ProductsContext.Provider>
+        </CategoriesContext.Provider>
     );
 }
