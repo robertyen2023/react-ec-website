@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import ProductCard from "../ProductCard/ProductCard";
 
 import './CategoryPreview.scss';
@@ -14,15 +15,18 @@ const CategoryPreview = ({ title, products }) => {
                                     product={product} 
                                 />
                             ));
+    const categoryLink = `/shop/${title}`;
 
     return (
         <div className="category-preview-container">
             <h2>
-                {/* to make sure只有文字clickable */}
-                {/* - not the whole h2 block */}
-                <span className="title">
-                    {upperCaseTitle}
-                </span>
+                <Link to={categoryLink}>
+                    {/* to make sure只有文字clickable */}
+                    {/* - not the whole h2 block */}
+                    <span className="title">
+                        {upperCaseTitle}
+                    </span>
+                </Link>
             </h2>
             <div className='preview'>
                 {productList}
