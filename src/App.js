@@ -18,7 +18,15 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Navagation />}>
         <Route index element={<Home />} />
-        <Route path="shop" element={<Shop />} />
+
+        {/* 1. For the route path 'shop/*', */}
+        {/* - the [wildcard / *] means [matching anything] */}
+        {/* - so anything with shop/[...] would be directed to the route below. */}
+        {/* - . */}
+        {/* 2. path = [$parentPath/*], */}
+        {/* - also means the route element (i.e. <Shop />) has its own route / sub route inside. */}
+        <Route path="shop/*" element={<Shop />} />
+
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<Checkout />} />
       </Route>
