@@ -133,7 +133,7 @@ export const createUserDocumentFromAuth = async (
                   // doc($db, $collectionS, $uniqueId/$identifier);
   const userDocRef = doc(db, 'users', userAuth.uid);
 
-  console.log(userDocRef);
+  // console.log(userDocRef);
 
   // based on the userAuth.uid
   const userSnapshot = await getDoc(userDocRef);
@@ -194,7 +194,7 @@ export const getCategoriesAndDocuments = async () => {
 
   const querySnapshot = await getDocs(q);
   const categoriesMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    console.log(docSnapshot.data());
+    // console.log(docSnapshot.data());
 
     // i.e. { title: 'Jackets', items: [...]  }
     const { title, items } = docSnapshot.data();
@@ -208,7 +208,7 @@ export const getCategoriesAndDocuments = async () => {
   //   womens: $itemsArr,
   //   ...
   // }
-  console.log(categoriesMap);
+  // console.log(categoriesMap);
 
   return categoriesMap;
 };
