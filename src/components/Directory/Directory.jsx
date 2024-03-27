@@ -1,12 +1,12 @@
 import './Directory.scss';
 
-import CategoryItem from '../CategoryItem/CategoryItem';
+import DirectoryItem from '../DirectoryItem/DirectoryItem';
 
 const Directory = ({ categoriesData }) => {
     if (!categoriesData || !categoriesData.length) return null;
 
     const categoryItems = categoriesData.map(({ id = 0, title = '', imageUrl = '' } = {}) => (
-        <CategoryItem
+        <DirectoryItem
             id={id}
             key={id}
             title={title}
