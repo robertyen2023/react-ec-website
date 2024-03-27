@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect, Fragment } from 'react';
 import { useParams } from "react-router-dom";
 
 import { CategoriesContext } from '../../../../contexts/categories-context';
@@ -24,10 +24,19 @@ const Category = () => {
         <ProductCard key={product.id} product={product} />
     ));
 
+    let categoryTitle;
+    if (category) {
+        const upperCaseCategory = category.toUpperCase();
+        categoryTitle = <h2 className='category-title'>{upperCaseCategory}</h2>;
+    }
+    
     return (
-        <div className='category-container'>
-            {categoryProductList}
-        </div>
+        <Fragment>
+            {categoryTitle}
+            <div className='category-container'>
+                {categoryProductList}
+            </div>
+        </Fragment>
     );
 };
 
